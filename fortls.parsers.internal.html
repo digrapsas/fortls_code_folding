@@ -1432,6 +1432,13 @@ var(3,4), var_name(size(val,1)*10)</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="fortls.parsers.internal.parser.FortranFile.update_scope_mlist">
+<span class="sig-name descname"><span class="pre">update_scope_mlist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_ast</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scope_name_prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_no</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fortls.parsers.internal.parser.FortranFile.update_scope_mlist" title="Link to this definition">¶</a></dt>
+<dd><p>Find the last unclosed scope (eline == sline) containing the
+scope_name_prefix and add update its nb of intermediate lines (mlines)</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py function">
@@ -2591,6 +2598,7 @@ and the documentation string that should be in normal Markdown.</p>
 <li><a class="reference internal" href="#fortls.parsers.internal.parser.FortranFile.preprocess"><code class="docutils literal notranslate"><span class="pre">FortranFile.preprocess()</span></code></a></li>
 <li><a class="reference internal" href="#fortls.parsers.internal.parser.FortranFile.set_contents"><code class="docutils literal notranslate"><span class="pre">FortranFile.set_contents()</span></code></a></li>
 <li><a class="reference internal" href="#fortls.parsers.internal.parser.FortranFile.strip_comment"><code class="docutils literal notranslate"><span class="pre">FortranFile.strip_comment()</span></code></a></li>
+<li><a class="reference internal" href="#fortls.parsers.internal.parser.FortranFile.update_scope_mlist"><code class="docutils literal notranslate"><span class="pre">FortranFile.update_scope_mlist()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#fortls.parsers.internal.parser.find_external"><code class="docutils literal notranslate"><span class="pre">find_external()</span></code></a></li>
@@ -2770,7 +2778,7 @@ and the documentation string that should be in normal Markdown.</p>
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=d3ad8e68"></script>
+</div><script src="_static/documentation_options.js?v=95d25168"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=5fa4622c"></script>
