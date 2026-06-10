@@ -1728,7 +1728,7 @@ class FortranFile:
     def update_scope_mlist(
         self, file_ast: FortranAST, scope_name_prefix: str, line_no: int
     ):
-        """Find the last unclosed scope (eline == sline) containing the
+        """Find the last unclosed scope (still eline == sline) containing the
         scope_name_prefix and add update its nb of intermediate lines (mlines)"""
 
         i = 1

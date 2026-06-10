@@ -1278,9 +1278,12 @@ class LangServer:
         # first treat scope objects ...
         for scope in file_obj.ast.scope_list:
             n_mlines = len(scope.mlines)
-            # ...with intermediate folding lines (if, select case) ...
+            # ...with intermediate folding lines (only 'select case' and 'if' currently) ...
             if n_mlines > 0:
-                self.add_range(folding_ranges, scope.sline - 1, scope.mlines[0] - 2)
+                if scope.get_desc() == 'SELECT':
+                    self.add_range(folding_ranges, scope.sline - 1, scope.eline - 2)
+                elif scope.get_desc() == 'IF':
+                    self.add_range(folding_ranges, scope.sline - 1, scope.mlines[0] - 2)
                 for i in range(1, n_mlines):
                     self.add_range(
                         folding_ranges, scope.mlines[i - 1] - 1, scope.mlines[i] - 2

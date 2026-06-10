@@ -1,13 +1,14 @@
 program select_case
 
-integer :: to_test, six
+integer :: to_test, six, twelve
 
 select case (to_test)
 case (1)
     six = 6*to_test
+twelve = 2*six
 case (2)
     six = 3*to_test
-case (3)
+    case (3)
     six = 2*to_test
 case default
     six = 6
