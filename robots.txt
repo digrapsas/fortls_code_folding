@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://fortls.fortran-lang.org/sitemap.xml
