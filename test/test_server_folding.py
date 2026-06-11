@@ -48,12 +48,12 @@ def test_folding_select_case():
     errcode, results = run_request(string)
     assert errcode == 0
     ref = [
-        {"startLine": 0, "endLine": 14},
-        {"startLine": 4, "endLine": 4},
-        {"startLine": 5, "endLine": 6},
-        {"startLine": 7, "endLine": 8},
-        {"startLine": 9, "endLine": 10},
-        {"startLine": 11, "endLine": 12},
+        {"startLine": 0, "endLine": 15},
+        {"startLine": 4, "endLine": 13},
+        {"startLine": 5, "endLine": 7},
+        {"startLine": 8, "endLine": 9},
+        {"startLine": 10, "endLine": 11},
+        {"startLine": 12, "endLine": 13},
     ]
     validate_folding(results[1], ref)
 

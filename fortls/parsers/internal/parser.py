@@ -20,6 +20,8 @@ from fortls.constants import (
     INTERFACE_TYPE_ID,
     SELECT_TYPE_ID,
     SUBMODULE_TYPE_ID,
+    IF_TYPE_ID,
+    SUBROUTINE_TYPE_ID,
     FRegex,
     Severity,
     log,
@@ -1381,7 +1383,7 @@ class FortranFile:
                     file_ast.end_scope_regex == FRegex.END_IF
                     and FRegex.ELSE_IF.match(line_no_comment) is not None
                 ):
-                    self.update_scope_mlist(file_ast, "#IF", line_no)
+                    self.update_scope_mlist(file_ast, IF_TYPE_ID, line_no)
                 elif (
                     file_ast.end_scope_regex == FRegex.END_SELECT
                     and (
@@ -1390,7 +1392,7 @@ class FortranFile:
                     )
                     is not None
                 ):
-                    self.update_scope_mlist(file_ast, "#SELECT", line_no)
+                    self.update_scope_mlist(file_ast, SELECT_TYPE_ID, line_no)
 
                 match = FRegex.END_WORD.match(line_no_comment)
                 # Handle end statement
@@ -1528,7 +1530,7 @@ class FortranFile:
                 )
                 file_ast.add_scope(new_sub, FRegex.END_SUB)
                 if line_no != line_no_end:
-                    file_ast.scope_list[-1].mlines.append(line_no_end)
+                    self.update_scope_mlist(file_ast, SUBROUTINE_TYPE_ID, line_no_end)
                 log.debug("%s !!! SUBROUTINE - Ln:%d", line, line_no)
 
             elif obj_type == "fun":
@@ -1726,15 +1728,15 @@ class FortranFile:
         return file_ast
 
     def update_scope_mlist(
-        self, file_ast: FortranAST, scope_name_prefix: str, line_no: int
+        self, file_ast: FortranAST, scope_type: int, line_no: int
     ):
-        """Find the last unclosed scope (still eline == sline) containing the
-        scope_name_prefix and add update its nb of intermediate lines (mlines)"""
+        """Get the last unclosed scope (still eline == sline), check if its
+        block type is correct and if so update its nb of intermediate lines (mlines)"""
 
         i = 1
         while True:
             scope = file_ast.scope_list[-i]
-            if (scope_name_prefix in scope.name) and (scope.eline == scope.sline):
+            if (scope.get_type() == scope_type) and (scope.eline == scope.sline):
                 scope.mlines.append(line_no)
                 return
             i += 1
